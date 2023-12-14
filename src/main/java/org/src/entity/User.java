@@ -1,10 +1,11 @@
 package org.src.entity;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.persistence.*;
+import org.src.UserInputDTO;
 
 @Setter
 @Getter
@@ -17,4 +18,13 @@ public class User {
     private String name;
 
     private Address address;
+
+    public UserInputDTO toConvertUserDTO() {
+        UserInputDTO dto = new UserInputDTO();
+        setId(dto.getId());
+        setName(dto.getName());
+        setAddress(dto.getAddress());
+        return dto;
+    }
+
 }
