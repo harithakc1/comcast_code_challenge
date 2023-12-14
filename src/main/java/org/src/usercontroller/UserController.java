@@ -1,30 +1,23 @@
-package org.src.Controller;
+package org.src.usercontroller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.src.Service.StudentService;
-import org.src.entity.Student;
-
-import java.util.List;
+import org.src.userservice.UserService;
 
 @RestController
-public class StudentController {
+public class UserController {
     @Autowired
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
-    @GetMapping("/students/{studentId}")
-    public Student getStudentByStudentId(@PathVariable Long studentId) {
-        return studentService.getStudentsByStudentId(studentId);
-    }
+    public UserService userService;
+
+    /*@GetMapping("/students/{studentId}")
+    public User getStudentByStudentId(@PathVariable Long studentId) {
+        return userService.getStudentsByStudentId(studentId);
+    }*/
 
     //only students name, from CS dept
 
-    @GetMapping("/students/{deptName}")
+   /* @GetMapping("/students/{deptName}")
     public List<String> getStudentsByDepartName(@PathVariable String deptName) {
-        return studentService.getStudentsByDepartmentName(deptName);
-    }
+        return userService.getStudentsByDepartmentName(deptName);
+    }*/
 }

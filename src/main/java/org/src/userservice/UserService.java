@@ -1,27 +1,24 @@
-package org.src.Service;
+package org.src.userservice;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.src.Repository.StudentRepository;
-import org.src.entity.Student;
+import org.src.repository.UserRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class StudentService {
+public class UserService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private UserRepository userRepository;
 
-    public Student getStudentsByStudentId(Long studentId) {
-        return studentRepository.findById(studentId).orElse(null);
-    }
+//    public Student getStudentsByStudentId(Long studentId) {
+//        return userRepository.findById(studentId).orElse(null);
+//    }
 
-    public List<String> getStudentsByDepartmentName(String deptName) {
-        List<Student> students = studentRepository.findAll();
-        return students.stream().filter(s -> s.getDepartment().getName().equals(deptName)).map(Student::getName).collect(Collectors.toList());
-    }
+   /* public List<String> getStudentsByDepartmentName(String deptName) {
+        List<User> users = userRepository.findAll();
+        return users.stream().filter(s -> s.getDepartment().getName().equals(deptName)).map(Student::getName).collect(Collectors.toList());
+    }*/
 }
