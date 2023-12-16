@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        appName = 'sbil-asset-creation-ng'
+        springBootVersion = '3.0.7'
+        springDependencyManagementPluginVersion = "1.1.0"
+    }
+    repositories {
+        repositories {
+            maven {
+                url "https://dcsartifacts.dell.com/artifactory/services-releases-virtual"
+                metadataSources {
+                    ignoreGradleMetadataRedirection()
+                    mavenPom()
+                    artifact()
+                }
+            }
+        }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:${springDependencyManagementPluginVersion}"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.26.1")
+        classpath("com.dell.services.bil:sbil-archetype-plugin:4.0.0")
+        classpath("net.ltgt.gradle:gradle-apt-plugin:0.15")
+    }
+    dependencies {
+        ant.unjar dest: 'build/gradle', src: configurations.classpath.find() {
+            File file -> file.getName().startsWith("sbil-archetype")
+        }
+
+    }
+   /* configurations {
+        localH2Implementation.extendsFrom implementation
+        localH2RuntimeOnly.extendsFrom runtimeOnly
+    }*/
+   /* sourceSets {
+        localH2 {
+            compileClasspath += sourceSets.main.output
+            runtimeClasspath += sourceSets.main.output
+        }
+    }*/
+
+   /* task localH2(type: org.springframework.boot.gradle.tasks.run.BootRun){
+        mainClass = "gradle.springboot.h2.local.example.ExampleApplication"
+        classpath = sourceSets.localH2.runtimeClasspath
+    }*/
+
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply from: 'build/gradle/build-module.gradle'
+apply from: 'dependencies.gradle'
+//apply from: 'testing.gradle'
+apply plugin: 'net.ltgt.apt'
