@@ -29,11 +29,10 @@ buildscript {
         }
 
     }
-    configurations {
+   /* configurations {
         localH2Implementation.extendsFrom implementation
         localH2RuntimeOnly.extendsFrom runtimeOnly
-    }
-
+    }*/
    /* sourceSets {
         localH2 {
             compileClasspath += sourceSets.main.output

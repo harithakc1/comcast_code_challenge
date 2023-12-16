@@ -25,20 +25,24 @@ public class UserService {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public UserInputDTO createUser(UserInputDTO userInputDTO){
+    public UserInputDTO createUser(UserInputDTO userInputDTO) {
         User newUser = userInputDTO.toConvertUserEntity();
         return userRepository.save(newUser).toConvertUserDTO();
     }
 
-    public UserInputDTO updateUser(Long id){
+    public UserInputDTO updateUser(Long id) {
         User existingUser = userRepository.findById(id).orElse(null);
-        assert existingUser != null;
-        return userRepository.save(existingUser).toConvertUserDTO();
+        if (Objects.nonNull(existingUser)) {
+            return userRepository.save(existingUser).toConvertUserDTO();
+        }
+        return UserInputDTO.builder().build();
+
     }
 
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         User existingUser = userRepository.findById(id).orElse(null);
-        assert existingUser != null;
-        userRepository.delete(existingUser);
+        if (Objects.nonNull(existingUser)) {
+            userRepository.delete(existingUser);
+        }
     }
 }
