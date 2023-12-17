@@ -18,7 +18,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
@@ -33,7 +32,7 @@ public class UserServiceTest {
     @MockBean
     private UserRepository userRepository;
 
-    private static final Long MOCK_USER_ID = 122L;
+    private static Long MOCK_USER_ID = 122L;
 
     private User newUserEntity() {
         return new User();
@@ -52,7 +51,7 @@ public class UserServiceTest {
 
     @Test
     public void givenUserIdWhenToUpdateUserThenUpdateSuccessfully() {
-        given(userRepository.findById(MOCK_USER_ID)).willReturn(Optional.of(any()));
+        given(userRepository.findById(MOCK_USER_ID)).willReturn(Optional.of(newUserEntity()));
         given(userRepository.save(any())).willReturn(newUserEntity());
         assertThatCode(() -> userService.updateUser(MOCK_USER_ID)).doesNotThrowAnyException();
 
@@ -62,8 +61,7 @@ public class UserServiceTest {
 
     @Test
     public void givenUserIdWhenToDeleteUserThenDeleteSuccessfully() {
-        given(userRepository.findById(MOCK_USER_ID)).willReturn(Optional.of(any()));
-        doNothing().when(userRepository).delete(any());
+        given(userRepository.findById(MOCK_USER_ID)).willReturn(Optional.of(newUserEntity()));
         assertThatCode(() -> userService.deleteUser(MOCK_USER_ID)).doesNotThrowAnyException();
 
         verify(userRepository).findById(any());
@@ -72,7 +70,7 @@ public class UserServiceTest {
 
     @Test
     public void givenFindAllUsersThenFindUsersSuccessfully() {
-        given(userRepository.findAll()).willReturn(List.of(any()));
+        given(userRepository.findAll()).willReturn(List.of(newUserEntity()));
         assertThatCode(() -> userService.findAllUsers()).doesNotThrowAnyException();
 
         verify(userRepository).findAll();
