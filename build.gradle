@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        appName = 'sbil-asset-creation-ng'
+        appName = 'adequate-shop-app'
         springBootVersion = '3.0.7'
         springDependencyManagementPluginVersion = "1.1.0"
     }
