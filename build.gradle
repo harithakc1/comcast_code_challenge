@@ -7,7 +7,6 @@ buildscript {
     repositories {
         repositories {
             maven {
-                url "https://dcsartifacts.dell.com/artifactory/services-releases-virtual"
                 metadataSources {
                     ignoreGradleMetadataRedirection()
                     mavenPom()
@@ -20,7 +19,6 @@ buildscript {
         classpath "io.spring.gradle:dependency-management-plugin:${springDependencyManagementPluginVersion}"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.26.1")
-        classpath("com.dell.services.bil:sbil-archetype-plugin:4.0.0")
         classpath("net.ltgt.gradle:gradle-apt-plugin:0.15")
     }
     dependencies {

@@ -1,6 +1,5 @@
 repositories {
     maven {
-        url "https://dcsartifacts.dell.com/artifactory/services-releases-virtual"
         metadataSources {
             ignoreGradleMetadataRedirection()
             mavenPom()
