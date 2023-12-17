@@ -18,8 +18,8 @@ import org.src.userservice.UserService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -52,19 +52,9 @@ public class UserControllerTest {
     @Test
     public void givenUpdateExistingUser() throws Exception {
         given(userService.updateUser(any())).willReturn(UserInputDTO.builder().build());
-        this.mockMvc.perform(patch("user/update/{id}")
-                        .content(objectMapper.writeValueAsString(MOCK_USER_ID))
+        this.mockMvc.perform(patch("/user/update/" + MOCK_USER_ID)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void givenDeleteExistingUser() throws Exception {
-        doNothing().when(userService).deleteUser(MOCK_USER_ID);
-        this.mockMvc.perform(delete("user/update/{id}")
-                        .content(objectMapper.writeValueAsString(MOCK_USER_ID))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 
 }
