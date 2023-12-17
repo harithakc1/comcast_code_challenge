@@ -1,11 +1,5 @@
 repositories {
-    maven {
-        metadataSources {
-            ignoreGradleMetadataRedirection()
-            mavenPom()
-            artifact()
-        }
-    }
+    mavenCentral()
 }
 configurations {
     ajc
